@@ -20,9 +20,11 @@
                 <TextBlock Text="需要转换第几页?" FontSize="10"/>
                 <TextBox Text="{Binding PageNumber}" FontSize="10"/>
                 <TextBlock Text="已完成" FontSize="10"/>
-                <TextBox Text="{Binding ProcessNumber}" FontSize="10"/>
-                <TextBlock Text="线程数量" FontSize="10"/>
-                <TextBox Text="{Binding ThreadNumber}" FontSize="10"/>
+                <TextBlock Text="{Binding ProcessNumber}" FontSize="10"/>
+                <TextBlock Text="已用时间" FontSize="10"/>
+                <TextBlock Text="{Binding PassedTime}" FontSize="10"/>
+                <TextBlock Text="剩余时间" FontSize="10"/>
+                <TextBlock Text="{Binding NeededTime}" FontSize="10"/>
                 <TextBlock Text="剪裁开始位置" FontSize="10"/>
                 <TextBox Text="{Binding StartCutLength}" FontSize="10"/>
                 <TextBlock Text="剪裁长度" FontSize="10"/>

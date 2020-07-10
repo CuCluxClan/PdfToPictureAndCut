@@ -8,9 +8,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using Apitron.PDF.Rasterizer;
+using Apitron.PDF.Rasterizer.Configuration;
 using Microsoft.Win32;
 using O2S.Components.PDFRender4NET.WPF;
 using PdfSelectPartToPic.MVVM;
+using Rectangle = System.Drawing.Rectangle;
 
 namespace PdfSelectPartToPic
 {
@@ -29,6 +32,24 @@ namespace PdfSelectPartToPic
 
         protected override void Poll()
         {
+            lock (Lock)
+            {
+                var second = 0.00;
+                if (_deviceTimer != null)
+                {
+                    second = _deviceTimer.GetElapseTime() / 1000;
+                    PassedTime = $"{second/60:N0} min, {second%60:N0}secs";
+                }
+
+                if (_isRunningConvert)
+                {
+                    if (second > 0)
+                    {
+                        var restNumber = _pdfFilePath.Capacity - _processNumber;
+                        
+                    }
+                }
+            }
         }
 
         #region Properties
@@ -104,6 +125,16 @@ namespace PdfSelectPartToPic
             }
         }
 
+        public string PassedTime
+        {
+            get => _passedTime;
+            set
+            {
+                _passedTime = value;
+                InvokePropertyChanged(nameof(PassedTime));
+            }
+        }
+
         #endregion
 
         #region Fields
@@ -115,6 +146,10 @@ namespace PdfSelectPartToPic
         private List<string> _pdfFilePath;
         private List<string> _picFilePath;
         private string _displayImagePath;
+        private DeviceTimer _deviceTimer;
+        private string _passedTime;
+        private bool _isRunningConvert;
+        
         
         #endregion
         
@@ -175,22 +210,38 @@ namespace PdfSelectPartToPic
             {
                 var imageOutputPath = Path.GetDirectoryName(_pdfFilePath.FirstOrDefault()) + @"\Pictures";
                 if (!Directory.Exists(imageOutputPath)) Directory.CreateDirectory(imageOutputPath);
-                
+                // Task.Run(() =>
+                // {
+                //     for (var i = 0; i < _pdfFilePath.Count; i++)
+                //     {
+                //         if (ThreadNumber > 49)
+                //         {
+                //             i--;
+                //             continue;
+                //         }
+                //         var obj = new object[] {_pdfFilePath[i], imageOutputPath};
+                //         var t = new Thread(Save);
+                //         t.SetApartmentState(ApartmentState.MTA);
+                //         t.Start(obj);
+                //         lock (Lock)
+                //         {
+                //             ThreadNumber++;
+                //         }
+                //     }
+                // });
+                _deviceTimer = new DeviceTimer();
+                _isRunningConvert = true;
                 Task.Run(() =>
                 {
-                    for (var i = 0; i < _pdfFilePath.Count; i++)
+                    Parallel.ForEach(_pdfFilePath, path=>
                     {
-                        if (ThreadNumber > 99)
-                        {
-                            i--;
-                            continue;
-                        }
-                        var obj = new object[] {_pdfFilePath[i], imageOutputPath};
-                        var t = new Thread(Save);
-                        t.SetApartmentState(ApartmentState.STA);
-                        t.Start(obj);
-                        ThreadNumber++;
-                    }
+                        var obj = new object[] {path, imageOutputPath};
+                        Save(obj);
+                    });
+                }).ContinueWith(task =>
+                {
+                    _deviceTimer = null;
+                    _isRunningConvert = false;
                 });
             }
         }
@@ -199,28 +250,44 @@ namespace PdfSelectPartToPic
             var path = ((object[]) obj)[0].ToString();
             var imageOutputPath = ((object[]) obj)[1];
             var imageName = Path.GetFileName(path).Replace(".pdf", "");
-            var pdfFile = PDFFile.Open(path);
+            
+            // var pdfFile = PDFFile.Open(path);
             if (PageNumber <= 0) PageNumber = 0;
-
-            if (PageNumber > pdfFile.PageCount) PageNumber = pdfFile.PageCount;
-            var pageImage = pdfFile.GetPageImage(PageNumber, 300, 300, PDFOutputImageFormat.BMP);
-            var bmp = new Bitmap(pageImage);
-            var qualityEncoder = Encoder.Quality;
-            var quality = (long) 500;
-            var ratio = new EncoderParameter(qualityEncoder, quality);
-            var codecParams = new EncoderParameters(1) {Param = {[0] = ratio}};
-            var jpegCodecInfo = ImageCodecInfo.GetImageEncoders()
-                .FirstOrDefault(x => x.FormatID == ImageFormat.Jpeg.Guid);
-            if (jpegCodecInfo != null)
-                bmp.Save($"{imageOutputPath}\\{imageName}.jpg", jpegCodecInfo, codecParams); // Save to JPG
-            _picFilePath.Add($"{imageOutputPath}\\{imageName}.jpg");
-            bmp.Dispose();
-            ProcessNumber++;
-            // GC.Collect();
-            // GC.WaitForPendingFinalizers();
-            // GC.Collect();
-            ThreadNumber--;
-            Thread.CurrentThread.Abort();
+            
+            // if (PageNumber > pdfFile.PageCount) PageNumber = pdfFile.PageCount;
+            // var pageImage = pdfFile.GetPageImage(PageNumber, 300, 300, PDFOutputImageFormat.BMP);
+            // var bmp = new Bitmap(pageImage);
+            // var qualityEncoder = Encoder.Quality;
+            // var quality = (long) 500;
+            // var ratio = new EncoderParameter(qualityEncoder, quality);
+            // var codecParams = new EncoderParameters(1) {Param = {[0] = ratio}};
+            // var jpegCodecInfo = ImageCodecInfo.GetImageEncoders()
+            //     .FirstOrDefault(x => x.FormatID == ImageFormat.Jpeg.Guid);
+            // if (jpegCodecInfo != null)
+            //     bmp.Save($"{imageOutputPath}\\{imageName}.jpg", jpegCodecInfo, codecParams); // Save to JPG
+            // _picFilePath.Add($"{imageOutputPath}\\{imageName}.jpg");
+            // bmp.Dispose();
+            
+            using (var fs = new FileStream(path, FileMode.Open))
+            {
+                // this object represents a PDF document
+                var document = new Document(fs);            
+                if (PageNumber > document.Pages.Count)
+                    PageNumber = document.Pages.Count;
+                // process and save pages one by one
+                var currentPage = document.Pages[PageNumber];
+                // we use original page's width and height for image as well as default rendering settings
+                var setting = new RenderingSettings {RenderMode = RenderMode.HighSpeed};
+                using (var bitmap = currentPage.Render(3*(int)currentPage.Width, 3*(int)currentPage.Height, setting))
+                {
+                    bitmap.Save($"{imageOutputPath}\\{imageName}.jpg", ImageFormat.Jpeg);
+                }
+            }
+            
+            lock (Lock)
+            {
+                ProcessNumber++;
+            }
         }
 
         private void ReadPic()
@@ -255,18 +322,19 @@ namespace PdfSelectPartToPic
 
             Task.Run(() =>
             {
-                for (var i = 0; i < _picFilePath.Count; i++)
-                {
-                    if (ThreadNumber > 99)
-                    {
-                        i--;
-                        continue;
-                    }
-                    var t = new Thread(CutPic);
-                    t.SetApartmentState(ApartmentState.STA);
-                    t.Start(_picFilePath[i]);
-                    ThreadNumber++;
-                }
+                // for (var i = 0; i < _picFilePath.Count; i++)
+                // {
+                //     if (ThreadNumber > 29)
+                //     {
+                //         i--;
+                //         continue;
+                //     }
+                //     var t = new Thread(CutPic);
+                //     t.SetApartmentState(ApartmentState.STA);
+                //     t.Start(_picFilePath[i]);
+                //     ThreadNumber++;
+                // }
+                Parallel.ForEach(_picFilePath, CutPic);
             });
         }
 
@@ -297,12 +365,13 @@ namespace PdfSelectPartToPic
             //释放对象
             img.Dispose();
             bmpCrop.Dispose();
-            ProcessNumber++;
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-            GC.Collect();
-            ThreadNumber--;
-            Thread.CurrentThread.Abort();
+            lock (Lock)
+                ProcessNumber++;
+            // GC.Collect();
+            // GC.WaitForPendingFinalizers();
+            // GC.Collect();
+            // ThreadNumber--;
+            // Thread.CurrentThread.Abort();
         }
 
         #endregion

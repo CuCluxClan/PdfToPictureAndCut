@@ -35,6 +35,10 @@
         <Prefer32bit>false</Prefer32bit>
     </PropertyGroup>
     <ItemGroup>
+        <Reference Include="Apitron.PDF.Rasterizer, Version=3.0.148.0, Culture=neutral, PublicKeyToken=6e759dbb0039406e">
+          <HintPath>..\packages\Apitron.PDF.Rasterizer.3.0.148\lib\net471\Apitron.PDF.Rasterizer.dll</HintPath>
+          <Private>True</Private>
+        </Reference>
         <Reference Include="O2S.Components.PDFRender4NET.WPF, Version=6.0.2.0, Culture=neutral, PublicKeyToken=409cca6fd4e6c30b">
           <HintPath>Packages\O2S.Components.PDFRender4NET.WPF.dll</HintPath>
         </Reference>
