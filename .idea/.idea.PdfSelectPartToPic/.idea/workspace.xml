@@ -4,7 +4,7 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7d01facb-3dd8-4036-8d98-14131e265a41" name="Default Changelist" comment="" />
+    <list default="true" id="7d01facb-3dd8-4036-8d98-14131e265a41" name="Default Changelist" comment="Update dll" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -57,10 +57,12 @@
         <option value="$PROJECT_DIR$/PdfSelectPartToPic/MainWindow.xaml.cs" />
         <option value="$PROJECT_DIR$/PdfSelectPartToPic/MainWindow.xaml" />
         <option value="$PROJECT_DIR$/PdfSelectPartToPic/MainViewModel.cs" />
+        <option value="$PROJECT_DIR$/PdfSelectPartToPic/Packages/O2S.Components.PDFRender4NET.WPF.xml" />
       </list>
     </option>
   </component>
   <component name="ProjectId" id="1eRTFeNzHD0oPTs3EuDp4PjE1H1" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -119,6 +121,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="Update dll" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update dll" />
   </component>
   <component name="WindowStateProjectService">
     <state x="2634" y="402" key="ANALYSIS_DLG_com.jetbrains.rider.actions.impl.cleanup.RiderCodeCleanupAction$actionPerformed$dlg$1" timestamp="1594344188161">
