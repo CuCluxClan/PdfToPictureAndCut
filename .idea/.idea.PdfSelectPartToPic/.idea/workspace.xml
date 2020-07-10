@@ -18,7 +18,7 @@
     <setting file="file://$PROJECT_DIR$/PdfSelectPartToPic/MVVM/TimerViewModelBase.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/PdfSelectPartToPic/MVVM/SubscriptionCommand.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/PdfSelectPartToPic/MVVM/IViewModelControl.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://C:/Program Files (x86)/NuGet/Config/Microsoft.VisualStudio.Offline.config" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../../Program Files (x86)/NuGet/Config/Microsoft.VisualStudio.Offline.config" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/PdfSelectPartToPic/MVVM/ChartViewModelBase.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/PdfSelectPartToPic/MVVM/ViewModelBase.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/PdfSelectPartToPic/MVVM/DelegateCommand.cs" root0="FORCE_HIGHLIGHTING" />
