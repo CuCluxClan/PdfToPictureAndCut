@@ -1,0 +1,43 @@
+﻿<Window x:Class="PdfSelectPartToPic.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="PDF剪切器" Height="600" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="15*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Image Grid.Column="0" Stretch="None" Source="{Binding DisplayedImagePath}"/>
+            <StackPanel Grid.Column="1">
+                <TextBlock Text="需要转换第几页?" FontSize="10"/>
+                <TextBox Text="{Binding PageNumber}" FontSize="10"/>
+                <TextBlock Text="已完成" FontSize="10"/>
+                <TextBox Text="{Binding ProcessNumber}" FontSize="10"/>
+                <TextBlock Text="线程数量" FontSize="10"/>
+                <TextBox Text="{Binding ThreadNumber}" FontSize="10"/>
+                <TextBlock Text="剪裁开始位置" FontSize="10"/>
+                <TextBox Text="{Binding StartCutLength}" FontSize="10"/>
+                <TextBlock Text="剪裁长度" FontSize="10"/>
+                <TextBox Text="{Binding CutLength}" FontSize="10"/>
+            </StackPanel>
+        </Grid>
+        <WrapPanel HorizontalAlignment="Center" Grid.Row="1">
+            <Button Content="读取文件" Command="{Binding MainCommand}" CommandParameter="ReadFile"/>
+            <TextBlock Text="已选定"/>
+            <TextBlock Text="{Binding FileCount}"/>
+            <TextBlock Text="个文件"/>
+            <Button Content="转换为图片" Command="{Binding ToPicCommand}" CommandParameter="ToPic"/>
+            <Button Content="读取图片" Command="{Binding MainCommand}" CommandParameter="ReadPic"/>
+            <Button Content="开始截取" Command="{Binding MainCommand}" CommandParameter="StartProcessing"/>
+        </WrapPanel>
+
+    </Grid>
+</Window>
