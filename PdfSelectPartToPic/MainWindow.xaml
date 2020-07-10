@@ -39,6 +39,7 @@
             <Button Content="转换为图片" Command="{Binding ToPicCommand}" CommandParameter="ToPic"/>
             <Button Content="读取图片" Command="{Binding MainCommand}" CommandParameter="ReadPic"/>
             <Button Content="开始截取" Command="{Binding MainCommand}" CommandParameter="StartProcessing"/>
+            <Button Content="一键干活儿 弟弟" Command="{Binding MainCommand}" CommandParameter="OneKey"/>
         </WrapPanel>
 
     </Grid>

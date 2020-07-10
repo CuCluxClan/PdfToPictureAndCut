@@ -4,16 +4,16 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Interop;
 using Apitron.PDF.Rasterizer;
 using Apitron.PDF.Rasterizer.Configuration;
 using Microsoft.Win32;
-using O2S.Components.PDFRender4NET.WPF;
 using PdfSelectPartToPic.MVVM;
 using Rectangle = System.Drawing.Rectangle;
+using RenderMode = Apitron.PDF.Rasterizer.Configuration.RenderMode;
 
 namespace PdfSelectPartToPic
 {
@@ -38,16 +38,26 @@ namespace PdfSelectPartToPic
                 if (_deviceTimer != null)
                 {
                     second = _deviceTimer.GetElapseTime() / 1000;
-                    PassedTime = $"{second/60:N0} min, {second%60:N0}secs";
-                }
-
-                if (_isRunningConvert)
-                {
-                    if (second > 0)
+                    PassedTime = $"{second/60:N0} min, {second%60:N0} secs";
+                    if (_isRunningConvert)
                     {
-                        var restNumber = _pdfFilePath.Capacity - _processNumber;
-                        
+                        if (second > 0)
+                        {
+                            var restNumber = _pdfFilePath.Capacity - _processNumber;
+                            var needSecond = (_processNumber / second) * restNumber;
+                            NeededTime = $"{needSecond/60:N0} min, {needSecond%60:N0} secs";
+                        }
                     }
+                    else if (_isRunningPicCorp)
+                    {
+                        if (second > 0)
+                        {
+                            var restNumber = _picFilePath.Capacity - _processNumber;
+                            var needSecond = (_processNumber / second) * restNumber;
+                            NeededTime = $"{needSecond/60:N0} min, {needSecond%60:N0} secs";
+                        }
+                    }
+
                 }
             }
         }
@@ -59,19 +69,9 @@ namespace PdfSelectPartToPic
         public ICommand CutPicCommand { get; }
 
         public int PageNumber { get; set; }
-        public int CutLength { get; set; } = 350;
+        public int CutLength { get; set; } = 400;
 
-        public int StartCutLength { get; set; } = 350;
-
-        public int ThreadNumber
-        {
-            get => _threadNumber;
-            set
-            {
-                _threadNumber = value;
-                InvokePropertyChanged(nameof(ThreadNumber));
-            }
-        }
+        public int StartCutLength { get; set; } = 100;
 
         public int ProcessNumber
         {
@@ -134,6 +134,16 @@ namespace PdfSelectPartToPic
                 InvokePropertyChanged(nameof(PassedTime));
             }
         }
+        
+        public string NeededTime
+        {
+            get => _neededTime;
+            set
+            {
+                _neededTime = value;
+                InvokePropertyChanged(nameof(NeededTime));
+            }
+        }
 
         #endregion
 
@@ -142,13 +152,15 @@ namespace PdfSelectPartToPic
         private static readonly object Lock = new object();
         private int _fileCount;
         private int _processNumber;
-        private int _threadNumber;
         private List<string> _pdfFilePath;
         private List<string> _picFilePath;
         private string _displayImagePath;
         private DeviceTimer _deviceTimer;
         private string _passedTime;
+        private string _neededTime;
         private bool _isRunningConvert;
+        private bool _isRunningPicCorp;
+        private bool _isOneKey;
         
         
         #endregion
@@ -170,7 +182,13 @@ namespace PdfSelectPartToPic
                     ReadPic();
                     break;
                 case "StartProcessing":
+                    ProcessNumber = 0;
                     PicProcess();
+                    break;
+                case "OneKey":
+                    ProcessNumber = 0;
+                    ConvertToPic();
+                    _isOneKey = true;
                     break;
             }
         }
@@ -205,7 +223,6 @@ namespace PdfSelectPartToPic
 
         private void ConvertToPic()
         {
-            ThreadNumber = 0;
             lock (Lock)
             {
                 var imageOutputPath = Path.GetDirectoryName(_pdfFilePath.FirstOrDefault()) + @"\Pictures";
@@ -240,8 +257,17 @@ namespace PdfSelectPartToPic
                     });
                 }).ContinueWith(task =>
                 {
-                    _deviceTimer = null;
-                    _isRunningConvert = false;
+                    if (_isOneKey)
+                    {
+                        ProcessNumber = 0;
+                        PicProcess();
+                    }
+                    else
+                    {
+                        _deviceTimer = null;
+                        _isRunningConvert = false;
+                        NeededTime = "0 min, 0 secs";
+                    }
                 });
             }
         }
@@ -281,11 +307,12 @@ namespace PdfSelectPartToPic
                 using (var bitmap = currentPage.Render(3*(int)currentPage.Width, 3*(int)currentPage.Height, setting))
                 {
                     bitmap.Save($"{imageOutputPath}\\{imageName}.jpg", ImageFormat.Jpeg);
+                    
                 }
             }
-            
             lock (Lock)
             {
+                _picFilePath.Add( $"{imageOutputPath}\\{imageName}.jpg");
                 ProcessNumber++;
             }
         }
@@ -314,6 +341,8 @@ namespace PdfSelectPartToPic
         private void PicProcess()
         {
             ProcessNumber = 0;
+            _isRunningPicCorp = true;
+            _deviceTimer = new DeviceTimer();
             var imageOutputPath = Path.GetDirectoryName(_picFilePath.FirstOrDefault())
                 ?.Replace(@"\Pictures", @"\CutResult");
             if (!Directory.Exists(imageOutputPath))
@@ -335,6 +364,12 @@ namespace PdfSelectPartToPic
                 //     ThreadNumber++;
                 // }
                 Parallel.ForEach(_picFilePath, CutPic);
+            }).ContinueWith(task =>
+            {
+                _deviceTimer = null;
+                _isRunningPicCorp = false;
+                NeededTime = "0 min, 0 secs";
+                MessageBox.Show("干完咯弟弟");
             });
         }
 
@@ -367,11 +402,7 @@ namespace PdfSelectPartToPic
             bmpCrop.Dispose();
             lock (Lock)
                 ProcessNumber++;
-            // GC.Collect();
-            // GC.WaitForPendingFinalizers();
-            // GC.Collect();
-            // ThreadNumber--;
-            // Thread.CurrentThread.Abort();
+            
         }
 
         #endregion

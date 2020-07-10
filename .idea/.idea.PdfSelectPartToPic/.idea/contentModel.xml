@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\My\AppData\Local\JetBrains\Rider2020.1\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\My\AppData\Local\JetBrains\Rider2020.1\resharper-host\Local\Transient\ReSharperHost\v201\SolutionCaches\_PdfSelectPartToPic.-1901731894.00" t="ExcludeRecursive" />
-    <e p="C:\Users\My\Documents\GitHub\PdfToPictureAndCut" t="IncludeFlat">
+    <e p="C:\Users\Yifan\AppData\Local\JetBrains\Rider2020.1\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Yifan\AppData\Local\JetBrains\Rider2020.1\resharper-host\Local\Transient\ReSharperHost\v201\SolutionCaches\_PdfSelectPartToPic.-1328172872.00" t="ExcludeRecursive" />
+    <e p="D:\学习\Foundations of Programming\PdfToPictureAndCut" t="IncludeFlat">
       <e p="packages" t="ExcludeRecursive" />
       <e p="PdfSelectPartToPic" t="IncludeRecursive">
         <e p="App.config" t="Include" />
@@ -27,15 +27,10 @@
           <e p="ViewModelBase.cs" t="Include" />
         </e>
         <e p="obj" t="ExcludeRecursive">
-          <e p="Debug" t="Include">
+          <e p="Release" t="Include">
             <e p="App.g.cs" t="Include" />
             <e p="MainWindow.g.cs" t="Include" />
-            <e p="PdfSelectPartToPic_Content.g.cs" t="Include" />
           </e>
-        </e>
-        <e p="packages" t="Include">
-          <e p="O2S.Components.PDFRender4NET.WPF.dll" t="Include" />
-          <e p="O2S.Components.PDFRender4NET.WPF.xml" t="Include" />
         </e>
         <e p="packages.config" t="Include" />
         <e p="PdfSelectPartToPic.csproj" t="IncludeRecursive" />
