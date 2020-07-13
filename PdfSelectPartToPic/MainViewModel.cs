@@ -44,7 +44,7 @@ namespace PdfSelectPartToPic
                         if (second > 0)
                         {
                             var restNumber = _pdfFilePath.Capacity - _processNumber;
-                            var needSecond = (_processNumber / second) * restNumber;
+                            var needSecond = (second / _processNumber) * restNumber;
                             NeededTime = $"{needSecond/60:N0} min, {needSecond%60:N0} secs";
                         }
                     }

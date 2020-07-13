@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\Yifan\AppData\Local\JetBrains\Rider2020.1\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\Yifan\AppData\Local\JetBrains\Rider2020.1\resharper-host\Local\Transient\ReSharperHost\v201\SolutionCaches\_PdfSelectPartToPic.-1328172872.00" t="ExcludeRecursive" />
-    <e p="D:\学习\Foundations of Programming\PdfToPictureAndCut" t="IncludeFlat">
+    <e p="C:\Users\My\AppData\Local\JetBrains\Rider2020.1\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\My\AppData\Local\JetBrains\Rider2020.1\resharper-host\Local\Transient\ReSharperHost\v201\SolutionCaches\_PdfSelectPartToPic.-1901731894.00" t="ExcludeRecursive" />
+    <e p="C:\Users\My\Documents\GitHub\PdfToPictureAndCut" t="IncludeFlat">
       <e p="packages" t="ExcludeRecursive" />
       <e p="PdfSelectPartToPic" t="IncludeRecursive">
         <e p="App.config" t="Include" />
