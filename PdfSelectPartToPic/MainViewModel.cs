@@ -7,13 +7,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Interop;
 using Apitron.PDF.Rasterizer;
 using Apitron.PDF.Rasterizer.Configuration;
 using Microsoft.Win32;
 using PdfSelectPartToPic.MVVM;
 using Rectangle = System.Drawing.Rectangle;
 using RenderMode = Apitron.PDF.Rasterizer.Configuration.RenderMode;
+using Size = System.Drawing.Size;
 
 namespace PdfSelectPartToPic
 {
@@ -27,6 +27,7 @@ namespace PdfSelectPartToPic
             MainCommand = new DelegateCommand<string>(Execute);
             ToPicCommand = new DelegateCommand<string>(Execute);
             CutPicCommand = new DelegateCommand<string>(Execute);
+            DataPicFilePath = new Dictionary<string, string>();
         }
 
 
@@ -69,9 +70,9 @@ namespace PdfSelectPartToPic
         public ICommand CutPicCommand { get; }
 
         public int PageNumber { get; set; }
-        public int CutLength { get; set; } = 400;
+        public int CutLength { get; set; } = 420;
 
-        public int StartCutLength { get; set; } = 100;
+        public int StartCutLength { get; set; } = 80;
 
         public int ProcessNumber
         {
@@ -92,6 +93,16 @@ namespace PdfSelectPartToPic
                 InvokePropertyChanged(nameof(FileCount));
             }
         }
+        
+        public int CombineFileCount
+        {
+            get => _combineFileCount;
+            set
+            {
+                _combineFileCount = value;
+                InvokePropertyChanged(nameof(CombineFileCount));
+            }
+        }
 
         public List<string> PdfFilePath
         {
@@ -99,7 +110,6 @@ namespace PdfSelectPartToPic
             set
             {
                 _pdfFilePath = value;
-                InvokePropertyChanged(nameof(ToPicCommand));
                 InvokePropertyChanged(nameof(PdfFilePath));
             }
         }
@@ -110,8 +120,16 @@ namespace PdfSelectPartToPic
             set
             {
                 _picFilePath = value;
-                InvokePropertyChanged(nameof(CutPicCommand));
                 InvokePropertyChanged(nameof(PicFilePath));
+            }
+        }        
+        public Dictionary<string,string> DataPicFilePath
+        {
+            get => _dataPicFilePath;
+            set
+            {
+                _dataPicFilePath = value;
+                InvokePropertyChanged(nameof(DataPicFilePath));
             }
         }
 
@@ -151,9 +169,11 @@ namespace PdfSelectPartToPic
 
         private static readonly object Lock = new object();
         private int _fileCount;
+        private int _combineFileCount;
         private int _processNumber;
         private List<string> _pdfFilePath;
         private List<string> _picFilePath;
+        private Dictionary<string,string> _dataPicFilePath;
         private string _displayImagePath;
         private DeviceTimer _deviceTimer;
         private string _passedTime;
@@ -181,9 +201,16 @@ namespace PdfSelectPartToPic
                 case "ReadPic":
                     ReadPic();
                     break;
+                case "LoadCombinePic":
+                    LoadCombinePicture();
+                    break;
                 case "StartProcessing":
                     ProcessNumber = 0;
                     PicProcess();
+                    break;
+                case "StartCombine":
+                    ProcessNumber = 0;
+                    CombineProcess();
                     break;
                 case "OneKey":
                     ProcessNumber = 0;
@@ -227,25 +254,6 @@ namespace PdfSelectPartToPic
             {
                 var imageOutputPath = Path.GetDirectoryName(_pdfFilePath.FirstOrDefault()) + @"\Pictures";
                 if (!Directory.Exists(imageOutputPath)) Directory.CreateDirectory(imageOutputPath);
-                // Task.Run(() =>
-                // {
-                //     for (var i = 0; i < _pdfFilePath.Count; i++)
-                //     {
-                //         if (ThreadNumber > 49)
-                //         {
-                //             i--;
-                //             continue;
-                //         }
-                //         var obj = new object[] {_pdfFilePath[i], imageOutputPath};
-                //         var t = new Thread(Save);
-                //         t.SetApartmentState(ApartmentState.MTA);
-                //         t.Start(obj);
-                //         lock (Lock)
-                //         {
-                //             ThreadNumber++;
-                //         }
-                //     }
-                // });
                 _deviceTimer = new DeviceTimer();
                 _isRunningConvert = true;
                 Task.Run(() =>
@@ -267,6 +275,7 @@ namespace PdfSelectPartToPic
                         _deviceTimer = null;
                         _isRunningConvert = false;
                         NeededTime = "0 min, 0 secs";
+                        MessageBox.Show("干完咯弟弟");
                     }
                 });
             }
@@ -277,23 +286,8 @@ namespace PdfSelectPartToPic
             var imageOutputPath = ((object[]) obj)[1];
             var imageName = Path.GetFileName(path).Replace(".pdf", "");
             
-            // var pdfFile = PDFFile.Open(path);
             if (PageNumber <= 0) PageNumber = 0;
-            
-            // if (PageNumber > pdfFile.PageCount) PageNumber = pdfFile.PageCount;
-            // var pageImage = pdfFile.GetPageImage(PageNumber, 300, 300, PDFOutputImageFormat.BMP);
-            // var bmp = new Bitmap(pageImage);
-            // var qualityEncoder = Encoder.Quality;
-            // var quality = (long) 500;
-            // var ratio = new EncoderParameter(qualityEncoder, quality);
-            // var codecParams = new EncoderParameters(1) {Param = {[0] = ratio}};
-            // var jpegCodecInfo = ImageCodecInfo.GetImageEncoders()
-            //     .FirstOrDefault(x => x.FormatID == ImageFormat.Jpeg.Guid);
-            // if (jpegCodecInfo != null)
-            //     bmp.Save($"{imageOutputPath}\\{imageName}.jpg", jpegCodecInfo, codecParams); // Save to JPG
-            // _picFilePath.Add($"{imageOutputPath}\\{imageName}.jpg");
-            // bmp.Dispose();
-            
+
             using (var fs = new FileStream(path, FileMode.Open))
             {
                 // this object represents a PDF document
@@ -343,6 +337,7 @@ namespace PdfSelectPartToPic
             ProcessNumber = 0;
             _isRunningPicCorp = true;
             _deviceTimer = new DeviceTimer();
+            
             var imageOutputPath = Path.GetDirectoryName(_picFilePath.FirstOrDefault())
                 ?.Replace(@"\Pictures", @"\CutResult");
             if (!Directory.Exists(imageOutputPath))
@@ -351,25 +346,22 @@ namespace PdfSelectPartToPic
 
             Task.Run(() =>
             {
-                // for (var i = 0; i < _picFilePath.Count; i++)
-                // {
-                //     if (ThreadNumber > 29)
-                //     {
-                //         i--;
-                //         continue;
-                //     }
-                //     var t = new Thread(CutPic);
-                //     t.SetApartmentState(ApartmentState.STA);
-                //     t.Start(_picFilePath[i]);
-                //     ThreadNumber++;
-                // }
                 Parallel.ForEach(_picFilePath, CutPic);
             }).ContinueWith(task =>
             {
-                _deviceTimer = null;
-                _isRunningPicCorp = false;
-                NeededTime = "0 min, 0 secs";
-                MessageBox.Show("干完咯弟弟");
+                
+                if (_isOneKey)
+                {
+                    ProcessNumber = 0;
+                    CombineProcess();
+                }
+                else
+                {
+                    _deviceTimer = null;
+                    _isRunningPicCorp = false;
+                    NeededTime = "0 min, 0 secs";
+                    MessageBox.Show("干完咯弟弟");
+                }
             });
         }
 
@@ -405,6 +397,82 @@ namespace PdfSelectPartToPic
             
         }
 
+        private void LoadCombinePicture()
+        {
+            _dataPicFilePath.Clear();
+            CombineFileCount = 0;
+            var thisDialog = new OpenFileDialog
+            {
+                InitialDirectory = "d:\\",
+                Filter = "png files (*.png)|*.png",
+                FilterIndex = 2,
+                RestoreDirectory = true,
+                Multiselect = true,
+                Title = "请选择需要转换的PNG文件!"
+            };
+            if (thisDialog.ShowDialog() == true)
+                foreach (var file in thisDialog.FileNames)
+                    try
+                    {
+                        _dataPicFilePath.Add(Path.GetFileNameWithoutExtension(file),file);
+                    }
+
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
+                    }
+
+            if (FileCount == _dataPicFilePath.Count)
+            {
+                CombineFileCount = _dataPicFilePath.Count;
+            }
+            else
+            {
+                MessageBox.Show("图片数量与选定的PDF文件或剪裁后的JPG文件数量不一致!");
+            }
+            
+        }
+        
+        private void CombineProcess()
+        {
+            ProcessNumber = 0;
+            _isRunningPicCorp = true;
+            _deviceTimer = new DeviceTimer();
+            var imageOutputPath = Path.GetDirectoryName(_picFilePath.FirstOrDefault())
+                ?.Replace(@"\Pictures", @"\CombineResult");
+            if (!Directory.Exists(imageOutputPath))
+                if (imageOutputPath != null)
+                    Directory.CreateDirectory(imageOutputPath);
+
+            Task.Run(() =>
+            {
+                Parallel.ForEach(_picFilePath, Combine);
+            }).ContinueWith(task =>
+            {
+                _deviceTimer = null;
+                _isRunningPicCorp = false;
+                NeededTime = "0 min, 0 secs";
+                MessageBox.Show("干完咯弟弟");
+            });
+        }
+
+        private void Combine(object path)
+        {
+            var imageName = Path.GetFileNameWithoutExtension(path.ToString());
+            if (_dataPicFilePath.ContainsKey(imageName))
+            {
+                var dataBitmap = new Bitmap(_dataPicFilePath[imageName]);
+                var srcBitmap = new Bitmap(path.ToString().Replace(@"\Pictures", @"\CutResult"));
+                dataBitmap = new Bitmap(dataBitmap,new Size(1579,245));
+                var outputBitmap = new Bitmap(srcBitmap.Width,srcBitmap.Height);
+                using (Graphics g = Graphics.FromImage(outputBitmap))
+                {
+                    g.DrawImage(srcBitmap, 0, 0);
+                    g.DrawImage(dataBitmap, 120, 155);
+                }
+                outputBitmap.Save(path.ToString().Replace(@"\Pictures", @"\CombineResult"));
+            }
+        }
         #endregion
     }
 }

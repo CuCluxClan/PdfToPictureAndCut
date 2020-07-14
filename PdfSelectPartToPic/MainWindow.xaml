@@ -9,6 +9,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="15*"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid Row="0">
             <Grid.ColumnDefinitions>
@@ -32,15 +33,21 @@
             </StackPanel>
         </Grid>
         <WrapPanel HorizontalAlignment="Center" Grid.Row="1">
-            <Button Content="读取文件" Command="{Binding MainCommand}" CommandParameter="ReadFile"/>
-            <TextBlock Text="已选定"/>
+            <TextBlock Text="已选定" Margin="20,0,0,0"/>
             <TextBlock Text="{Binding FileCount}"/>
-            <TextBlock Text="个文件"/>
-            <Button Content="转换为图片" Command="{Binding ToPicCommand}" CommandParameter="ToPic"/>
-            <Button Content="读取图片" Command="{Binding MainCommand}" CommandParameter="ReadPic"/>
-            <Button Content="开始截取" Command="{Binding MainCommand}" CommandParameter="StartProcessing"/>
-            <Button Content="一键干活儿 弟弟" Command="{Binding MainCommand}" CommandParameter="OneKey"/>
+            <TextBlock Text="个PDF文件" Margin="0,0,20,0"/>
+            <TextBlock Text="已选定"/>
+            <TextBlock Text="{Binding CombineFileCount}"/>
+            <TextBlock Text="需要拼接的图片" Margin="0,0,20,0"/>
         </WrapPanel>
-
+        <WrapPanel HorizontalAlignment="Center" Grid.Row="2">
+            <Button Content="读取文件" Margin="5,0,0,0" Command="{Binding MainCommand}" CommandParameter="ReadFile"/>
+            <Button Content="转换为图片" Margin="5,0,0,0" Command="{Binding ToPicCommand}" CommandParameter="ToPic"/>
+            <Button Content="读取图片" Margin="5,0,0,0" Command="{Binding MainCommand}" CommandParameter="ReadPic"/>
+            <Button Content="开始截取" Margin="5,0,0,0" Command="{Binding MainCommand}" CommandParameter="StartProcessing"/>
+            <Button Content="一键干活儿 弟弟" Margin="5,0,0,0" Command="{Binding MainCommand}" CommandParameter="OneKey"/>
+            <Button Content="读取拼接图片" Margin="5,0,0,0" Command="{Binding MainCommand}" CommandParameter="LoadCombinePic"/>
+            <Button Content="开始拼接" Margin="5,0,0,0" Command="{Binding MainCommand}" CommandParameter="StartCombine"/>
+        </WrapPanel>
     </Grid>
 </Window>
