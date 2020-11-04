@@ -35,8 +35,8 @@
         <Prefer32bit>false</Prefer32bit>
     </PropertyGroup>
     <ItemGroup>
-        <Reference Include="Apitron.PDF.Rasterizer, Version=3.0.148.0, Culture=neutral, PublicKeyToken=6e759dbb0039406e">
-          <HintPath>..\packages\Apitron.PDF.Rasterizer.3.0.148\lib\net471\Apitron.PDF.Rasterizer.dll</HintPath>
+        <Reference Include="Apitron.PDF.Rasterizer, Version=3.0.153.0, Culture=neutral, PublicKeyToken=6e759dbb0039406e">
+          <HintPath>..\packages\Apitron.PDF.Rasterizer.3.0.153\lib\net471\Apitron.PDF.Rasterizer.dll</HintPath>
           <Private>True</Private>
         </Reference>
         <Reference Include="System" />
