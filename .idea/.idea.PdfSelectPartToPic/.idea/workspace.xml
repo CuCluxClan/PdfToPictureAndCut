@@ -23,10 +23,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7d01facb-3dd8-4036-8d98-14131e265a41" name="Default Changelist" comment="Update dll">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.PdfSelectPartToPic/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PdfSelectPartToPic/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.PdfSelectPartToPic/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PdfSelectPartToPic/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PdfSelectPartToPic/PdfSelectPartToPic.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/PdfSelectPartToPic/PdfSelectPartToPic.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PdfSelectPartToPic/packages.config" beforeDir="false" afterPath="$PROJECT_DIR$/PdfSelectPartToPic/packages.config" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,6 +35,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/PdfSelectPartToPic/MVVM/TimerViewModelBase.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/63DD8BF9-8CFA-4BA9-85AF-735EF1A56BA9/10/44418364/Parallel.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/PdfSelectPartToPic/MVVM/ChartViewModelBase.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/PdfSelectPartToPic/MVVM/ViewModelBase.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/PdfSelectPartToPic/MainWindow.xaml.cs" root0="FORCE_HIGHLIGHTING" />
@@ -46,11 +44,13 @@
     <setting file="file://$PROJECT_DIR$/PdfSelectPartToPic/MVVM/DelegateCommand.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/PdfSelectPartToPic/MVVM/RelayCommand.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/PdfSelectPartToPic/MVVM/PeriodicJob.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/PdfSelectPartToPic/MVVM/SubscriptionCommand.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/PdfSelectPartToPic/MVVM/IViewModelControl.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Roaming/NuGet/NuGet.Config" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/PdfSelectPartToPic/MainViewModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/PdfSelectPartToPic/App.xaml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/PdfSelectPartToPic/MainWindow.xaml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/PdfSelectPartToPic/MVVM/SubscriptionAttribute.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/PdfSelectPartToPic/App.xaml.cs" root0="FORCE_HIGHLIGHTING" />
@@ -145,7 +145,7 @@
       <workItem from="1594368244362" duration="5906000" />
       <workItem from="1594392087810" duration="1909000" />
       <workItem from="1594627268707" duration="901000" />
-      <workItem from="1604479083495" duration="927000" />
+      <workItem from="1604479083495" duration="2540000" />
     </task>
     <task id="LOCAL-00001" summary="Update dll">
       <created>1594352129025</created>
@@ -175,90 +175,90 @@
     <option name="LAST_COMMIT_MESSAGE" value="Update dll" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1089" height="466" key="DebuggerActiveHint" timestamp="1604479414509">
+    <state width="1089" height="466" key="DebuggerActiveHint" timestamp="1604480990120">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1089" height="466" key="DebuggerActiveHint/0.0.1920.1050/0.-1080.1920.1050@0.0.1920.1050" timestamp="1604479414509" />
-    <state width="1879" height="285" key="GridCell.Tab.0.bottom" timestamp="1604479668987">
+    <state width="1089" height="466" key="DebuggerActiveHint/0.0.1920.1050/0.-1080.1920.1050@0.0.1920.1050" timestamp="1604480990120" />
+    <state width="1879" height="379" key="GridCell.Tab.0.bottom" timestamp="1604521354521">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1879" height="285" key="GridCell.Tab.0.bottom/0.0.1920.1050/0.-1080.1920.1050@0.0.1920.1050" timestamp="1604479668987" />
-    <state width="1879" height="285" key="GridCell.Tab.0.center" timestamp="1604479668987">
+    <state width="1879" height="379" key="GridCell.Tab.0.bottom/0.0.1920.1050/0.-1080.1920.1050@0.0.1920.1050" timestamp="1604521354521" />
+    <state width="1879" height="379" key="GridCell.Tab.0.center" timestamp="1604521354521">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1879" height="285" key="GridCell.Tab.0.center/0.0.1920.1050/0.-1080.1920.1050@0.0.1920.1050" timestamp="1604479668987" />
-    <state width="1879" height="285" key="GridCell.Tab.0.left" timestamp="1604479668987">
+    <state width="1879" height="379" key="GridCell.Tab.0.center/0.0.1920.1050/0.-1080.1920.1050@0.0.1920.1050" timestamp="1604521354521" />
+    <state width="1879" height="379" key="GridCell.Tab.0.left" timestamp="1604521354521">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1879" height="285" key="GridCell.Tab.0.left/0.0.1920.1050/0.-1080.1920.1050@0.0.1920.1050" timestamp="1604479668987" />
-    <state width="1879" height="285" key="GridCell.Tab.0.right" timestamp="1604479668987">
+    <state width="1879" height="379" key="GridCell.Tab.0.left/0.0.1920.1050/0.-1080.1920.1050@0.0.1920.1050" timestamp="1604521354521" />
+    <state width="1879" height="379" key="GridCell.Tab.0.right" timestamp="1604521354521">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1879" height="285" key="GridCell.Tab.0.right/0.0.1920.1050/0.-1080.1920.1050@0.0.1920.1050" timestamp="1604479668987" />
-    <state width="1879" height="379" key="GridCell.Tab.1.bottom" timestamp="1604479546540">
+    <state width="1879" height="379" key="GridCell.Tab.0.right/0.0.1920.1050/0.-1080.1920.1050@0.0.1920.1050" timestamp="1604521354521" />
+    <state width="1879" height="379" key="GridCell.Tab.1.bottom" timestamp="1604521354522">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1879" height="379" key="GridCell.Tab.1.bottom/0.0.1920.1050/0.-1080.1920.1050@0.0.1920.1050" timestamp="1604479546540" />
-    <state width="1879" height="379" key="GridCell.Tab.1.center" timestamp="1604479546540">
+    <state width="1879" height="379" key="GridCell.Tab.1.bottom/0.0.1920.1050/0.-1080.1920.1050@0.0.1920.1050" timestamp="1604521354522" />
+    <state width="1879" height="379" key="GridCell.Tab.1.center" timestamp="1604521354521">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1879" height="379" key="GridCell.Tab.1.center/0.0.1920.1050/0.-1080.1920.1050@0.0.1920.1050" timestamp="1604479546540" />
-    <state width="1879" height="379" key="GridCell.Tab.1.left" timestamp="1604479546540">
+    <state width="1879" height="379" key="GridCell.Tab.1.center/0.0.1920.1050/0.-1080.1920.1050@0.0.1920.1050" timestamp="1604521354521" />
+    <state width="1879" height="379" key="GridCell.Tab.1.left" timestamp="1604521354521">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1879" height="379" key="GridCell.Tab.1.left/0.0.1920.1050/0.-1080.1920.1050@0.0.1920.1050" timestamp="1604479546540" />
-    <state width="1879" height="379" key="GridCell.Tab.1.right" timestamp="1604479546540">
+    <state width="1879" height="379" key="GridCell.Tab.1.left/0.0.1920.1050/0.-1080.1920.1050@0.0.1920.1050" timestamp="1604521354521" />
+    <state width="1879" height="379" key="GridCell.Tab.1.right" timestamp="1604521354521">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1879" height="379" key="GridCell.Tab.1.right/0.0.1920.1050/0.-1080.1920.1050@0.0.1920.1050" timestamp="1604479546540" />
-    <state width="1879" height="379" key="GridCell.Tab.2.bottom" timestamp="1604479546540">
+    <state width="1879" height="379" key="GridCell.Tab.1.right/0.0.1920.1050/0.-1080.1920.1050@0.0.1920.1050" timestamp="1604521354521" />
+    <state width="1879" height="379" key="GridCell.Tab.2.bottom" timestamp="1604521354522">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1879" height="379" key="GridCell.Tab.2.bottom/0.0.1920.1050/0.-1080.1920.1050@0.0.1920.1050" timestamp="1604479546540" />
-    <state width="1879" height="379" key="GridCell.Tab.2.center" timestamp="1604479546540">
+    <state width="1879" height="379" key="GridCell.Tab.2.bottom/0.0.1920.1050/0.-1080.1920.1050@0.0.1920.1050" timestamp="1604521354522" />
+    <state width="1879" height="379" key="GridCell.Tab.2.center" timestamp="1604521354522">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1879" height="379" key="GridCell.Tab.2.center/0.0.1920.1050/0.-1080.1920.1050@0.0.1920.1050" timestamp="1604479546540" />
-    <state width="1879" height="379" key="GridCell.Tab.2.left" timestamp="1604479546540">
+    <state width="1879" height="379" key="GridCell.Tab.2.center/0.0.1920.1050/0.-1080.1920.1050@0.0.1920.1050" timestamp="1604521354522" />
+    <state width="1879" height="379" key="GridCell.Tab.2.left" timestamp="1604521354522">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1879" height="379" key="GridCell.Tab.2.left/0.0.1920.1050/0.-1080.1920.1050@0.0.1920.1050" timestamp="1604479546540" />
-    <state width="1879" height="379" key="GridCell.Tab.2.right" timestamp="1604479546540">
+    <state width="1879" height="379" key="GridCell.Tab.2.left/0.0.1920.1050/0.-1080.1920.1050@0.0.1920.1050" timestamp="1604521354522" />
+    <state width="1879" height="379" key="GridCell.Tab.2.right" timestamp="1604521354522">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1879" height="379" key="GridCell.Tab.2.right/0.0.1920.1050/0.-1080.1920.1050@0.0.1920.1050" timestamp="1604479546540" />
-    <state width="1879" height="379" key="GridCell.Tab.3.bottom" timestamp="1604479546540">
+    <state width="1879" height="379" key="GridCell.Tab.2.right/0.0.1920.1050/0.-1080.1920.1050@0.0.1920.1050" timestamp="1604521354522" />
+    <state width="1879" height="379" key="GridCell.Tab.3.bottom" timestamp="1604521354523">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1879" height="379" key="GridCell.Tab.3.bottom/0.0.1920.1050/0.-1080.1920.1050@0.0.1920.1050" timestamp="1604479546540" />
-    <state width="1879" height="379" key="GridCell.Tab.3.center" timestamp="1604479546540">
+    <state width="1879" height="379" key="GridCell.Tab.3.bottom/0.0.1920.1050/0.-1080.1920.1050@0.0.1920.1050" timestamp="1604521354523" />
+    <state width="1879" height="379" key="GridCell.Tab.3.center" timestamp="1604521354523">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1879" height="379" key="GridCell.Tab.3.center/0.0.1920.1050/0.-1080.1920.1050@0.0.1920.1050" timestamp="1604479546540" />
-    <state width="1879" height="379" key="GridCell.Tab.3.left" timestamp="1604479546540">
+    <state width="1879" height="379" key="GridCell.Tab.3.center/0.0.1920.1050/0.-1080.1920.1050@0.0.1920.1050" timestamp="1604521354523" />
+    <state width="1879" height="379" key="GridCell.Tab.3.left" timestamp="1604521354522">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1879" height="379" key="GridCell.Tab.3.left/0.0.1920.1050/0.-1080.1920.1050@0.0.1920.1050" timestamp="1604479546540" />
-    <state width="1879" height="379" key="GridCell.Tab.3.right" timestamp="1604479546540">
+    <state width="1879" height="379" key="GridCell.Tab.3.left/0.0.1920.1050/0.-1080.1920.1050@0.0.1920.1050" timestamp="1604521354522" />
+    <state width="1879" height="379" key="GridCell.Tab.3.right" timestamp="1604521354523">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1879" height="379" key="GridCell.Tab.3.right/0.0.1920.1050/0.-1080.1920.1050@0.0.1920.1050" timestamp="1604479546540" />
-    <state width="1879" height="379" key="GridCell.Tab.4.bottom" timestamp="1604479546540">
+    <state width="1879" height="379" key="GridCell.Tab.3.right/0.0.1920.1050/0.-1080.1920.1050@0.0.1920.1050" timestamp="1604521354523" />
+    <state width="1879" height="379" key="GridCell.Tab.4.bottom" timestamp="1604521354523">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1879" height="379" key="GridCell.Tab.4.bottom/0.0.1920.1050/0.-1080.1920.1050@0.0.1920.1050" timestamp="1604479546540" />
-    <state width="1879" height="379" key="GridCell.Tab.4.center" timestamp="1604479546540">
+    <state width="1879" height="379" key="GridCell.Tab.4.bottom/0.0.1920.1050/0.-1080.1920.1050@0.0.1920.1050" timestamp="1604521354523" />
+    <state width="1879" height="379" key="GridCell.Tab.4.center" timestamp="1604521354523">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1879" height="379" key="GridCell.Tab.4.center/0.0.1920.1050/0.-1080.1920.1050@0.0.1920.1050" timestamp="1604479546540" />
-    <state width="1879" height="379" key="GridCell.Tab.4.left" timestamp="1604479546540">
+    <state width="1879" height="379" key="GridCell.Tab.4.center/0.0.1920.1050/0.-1080.1920.1050@0.0.1920.1050" timestamp="1604521354523" />
+    <state width="1879" height="379" key="GridCell.Tab.4.left" timestamp="1604521354523">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1879" height="379" key="GridCell.Tab.4.left/0.0.1920.1050/0.-1080.1920.1050@0.0.1920.1050" timestamp="1604479546540" />
-    <state width="1879" height="379" key="GridCell.Tab.4.right" timestamp="1604479546540">
+    <state width="1879" height="379" key="GridCell.Tab.4.left/0.0.1920.1050/0.-1080.1920.1050@0.0.1920.1050" timestamp="1604521354523" />
+    <state width="1879" height="379" key="GridCell.Tab.4.right" timestamp="1604521354523">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1879" height="379" key="GridCell.Tab.4.right/0.0.1920.1050/0.-1080.1920.1050@0.0.1920.1050" timestamp="1604479546540" />
+    <state width="1879" height="379" key="GridCell.Tab.4.right/0.0.1920.1050/0.-1080.1920.1050@0.0.1920.1050" timestamp="1604521354523" />
     <state x="491" y="170" key="SettingsEditor" timestamp="1604479243648">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
@@ -292,7 +292,38 @@
           </properties>
           <option name="timeStamp" value="8" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/PdfSelectPartToPic/MainViewModel.cs</url>
+          <line>448</line>
+          <properties documentPath="$PROJECT_DIR$/PdfSelectPartToPic/MainViewModel.cs" initialLine="448">
+            <startOffsets>
+              <option value="14778" />
+            </startOffsets>
+            <endOffsets>
+              <option value="14818" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/PdfSelectPartToPic/MainViewModel.cs</url>
+          <line>460</line>
+          <properties documentPath="$PROJECT_DIR$/PdfSelectPartToPic/MainViewModel.cs" initialLine="460">
+            <startOffsets>
+              <option value="15128" />
+            </startOffsets>
+            <endOffsets>
+              <option value="15194" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="DotNetProject">
+        <watch expression="_picFilePath" language="C#" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>
